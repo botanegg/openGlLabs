@@ -15,59 +15,59 @@ int N, M;
 
 void CALLBACK resize(int width,int height)
 {
-   // Здесь вы указываете ту часть окна,
-   // куда осуществляется вывод OpenGL.
-   glViewport(0,0,width,height);
-   glMatrixMode( GL_PROJECTION );
-   glLoadIdentity();
-   // Устанавливаем тип проекции.
-   // glOrtho - параллельная
-   // glFrustum - перспективная
-   // Параметры у этих функций одинаковые.
-   // Они определяют объем, который вы видите.
-   // левая стенка - пять единиц влево
-   // правая - пять единиц вправо
-   // далее, нижняя стенка и верхняя
-   // и наконец, передняя и задняя
-   // см. ниже картинку
-   glOrtho(-5,5, -5,5, 2,12);
-   // Устанавливаем точку, в которой
-   // находится наш глаз ---(0,0,5)
-   // направление, куда смотрим --- (0,0,0)
-   // вектор, принимаемый за направление вверх --- (0,1,0)
-   // этим вектором является ось Y
-   gluLookAt( 0,0,5, 0,0,0, 0,1,0 );
-   glMatrixMode( GL_MODELVIEW );
+    // Здесь вы указываете ту часть окна,
+    // куда осуществляется вывод OpenGL.
+    glViewport(0,0,width,height);
+    glMatrixMode( GL_PROJECTION );
+    glLoadIdentity();
+    // Устанавливаем тип проекции.
+    // glOrtho - параллельная
+    // glFrustum - перспективная
+    // Параметры у этих функций одинаковые.
+    // Они определяют объем, который вы видите.
+    // левая стенка - пять единиц влево
+    // правая - пять единиц вправо
+    // далее, нижняя стенка и верхняя
+    // и наконец, передняя и задняя
+    // см. ниже картинку
+    glOrtho(-5,5, -5,5, 2,12);
+    // Устанавливаем точку, в которой
+    // находится наш глаз ---(0,0,5)
+    // направление, куда смотрим --- (0,0,0)
+    // вектор, принимаемый за направление вверх --- (0,1,0)
+    // этим вектором является ось Y
+    gluLookAt( 0,0,5, 0,0,0, 0,1,0 );
+    glMatrixMode( GL_MODELVIEW );
 }
 void CALLBACK display(void)
 {
- glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-        // remove next tree lines
-        // and enter your code here
-         
-  int i, j;
-  float dx = 0.1, dy = 0.1; 
-  float x0 = -N*dx/2, y0 = -M*dy/2;
-  glBegin(GL_LINES);
-	for (i = 0; i<=N; i++)
-	{
-		glVertex3f(i*dx+x0, y0, -1.0f);        
-		glVertex3f(i*dx+x0, y0+M*dy, -1.0f);        
-	}
-	for (j = 0; j<=M; j++)
-	{
-		glVertex3f(x0, y0+j*dy, -1.0f);        
-		glVertex3f(N*dx+x0, y0+j*dy, -1.0f);        
-	}
+    glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    // remove next tree lines
+    // and enter your code here
 
-  glEnd();
+    int i, j;
+    float dx = 0.1, dy = 0.1;
+    float x0 = -N*dx/2, y0 = -M*dy/2;
+    glBegin(GL_LINES);
+    for (i = 0; i<=N; i++)
+    {
+        glVertex3f(i*dx+x0, y0, -1.0f);
+        glVertex3f(i*dx+x0, y0+M*dy, -1.0f);
+    }
+    for (j = 0; j<=M; j++)
+    {
+        glVertex3f(x0, y0+j*dy, -1.0f);
+        glVertex3f(N*dx+x0, y0+j*dy, -1.0f);
+    }
 
-  auxSwapBuffers();
+    glEnd();
+
+    auxSwapBuffers();
 }
 void RunOpenGL()
 {
-	  float pos[4] = {3,3,3,1};
-      float dir[3] = {-1,-1,-1};
+    float pos[4] = {3,3,3,1};
+    float dir[3] = {-1,-1,-1};
     // указываем координаты окна на экране
     // верхний левый угол (50,10)
     // ширина и высота - 400
@@ -107,26 +107,26 @@ void RunOpenGL()
     // включаем нулевую лампу
     glEnable(GL_LIGHT0);
     // разрешаем смешение цветов
-     glEnable(GL_BLEND);
+    glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // устанавливаем положение нулевой лампы
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
     glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
-   // и последнее, устанавливаем
-   // функцию display отрисовки окна
-   // эта функция будет вызываться всякий раз,
-   // когда потребуется перерисовать окно
-   // например, когда вы развернете окно на весь экран
-   // в windows - это обработчик сообщения WM_PAINT
+    // и последнее, устанавливаем
+    // функцию display отрисовки окна
+    // эта функция будет вызываться всякий раз,
+    // когда потребуется перерисовать окно
+    // например, когда вы развернете окно на весь экран
+    // в windows - это обработчик сообщения WM_PAINT
     auxMainLoop(display);
 }
 
 void main()
 {
-	cout <<"Enter N, M"<<endl;
+    cout <<"Enter N, M"<<endl;
 
-	cin>>N>>M;
-	
-	RunOpenGL();
-	getch();
+    cin>>N>>M;
+
+    RunOpenGL();
+    getch();
 }
