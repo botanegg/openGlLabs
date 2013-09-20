@@ -3,9 +3,13 @@ cmake_minimum_required (VERSION 2.6)
 set(PROJECT_NAME testing)
 project(${PROJECT_NAME})
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
-set(CMAKE_CPP_FLAGS "${CMAKE_CPP_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+
+set(COMPILE_FLAGS "-g -Wall -Wextra -Wpedantic -Weffc++")
+
+set(CMAKE_C_FLAGS "${COMPILE_FLAGS}")
+set(CMAKE_CPP_FLAGS "${COMPILE_FLAGS}")
+set(CMAKE_CXX_FLAGS "${COMPILE_FLAGS}")
+
 
 set(srcs
 	main.cpp
