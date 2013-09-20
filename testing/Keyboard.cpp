@@ -13,6 +13,6 @@ void Keyboard::release(unsigned char key) {
     keyPress[key] = false;
 }
 
-const bool Keyboard::isPressed(unsigned char key) {
+bool Keyboard::isPressed(unsigned char key) {
     return keyPress[key];
 }

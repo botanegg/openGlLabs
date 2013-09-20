@@ -10,7 +10,7 @@ public:
     void press(unsigned char key);
     void release(unsigned char key);
 
-    const bool isPressed(unsigned char key);
+    bool isPressed(unsigned char key);
 };
 
 

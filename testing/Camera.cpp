@@ -61,24 +61,24 @@ void Camera::addAngleH(short add) {
     camDirectUpdate();
 }
 
-const float Camera::lookAtX() {
+float Camera::lookAtX() {
     return camX + viewVecX;
 }
 
-const float Camera::lookAtY() {
+float Camera::lookAtY() {
     return camY + viewVecY;
 }
 
-const float Camera::lookAtZ() {
+float Camera::lookAtZ() {
     return camZ + viewVecZ;
 }
 
-const float Camera::getAngleXZ() {
+float Camera::getAngleXZ() {
     return -((float)angleXZ)/(unsigned short)USHRT_MAX*2*M_PI;
 }
 
 
-const float Camera::getAngleH() {
+float Camera::getAngleH() {
     return ((float)angleH)/(unsigned short)USHRT_MAX*M_PI;
 }
 
@@ -105,4 +105,3 @@ void Camera::camDirectUpdate() {
     upDirectY = a[2] * b[0] - a[0] * b[2];
     upDirectZ = a[0] * b[1] - a[1] * b[0];
 }
-

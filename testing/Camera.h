@@ -33,12 +33,12 @@ public:
     void addAngleXZ(short add);
     void addAngleH(short add);
 
-    const float lookAtX();
-    const float lookAtY();
-    const float lookAtZ();
+    float lookAtX();
+    float lookAtY();
+    float lookAtZ();
 
-    const float getAngleXZ();
-    const float getAngleH();
+    float getAngleXZ();
+    float getAngleH();
 
     void camDirectUpdate();
 
