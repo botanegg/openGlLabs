@@ -94,7 +94,7 @@ float Camera::getAngleXZ() const {
 
 
 float Camera::getAngleH() const {
-    return ((float)angleH) / (unsigned short)(USHRT_MAX * M_PI);
+    return ((float)angleH) / (unsigned short)USHRT_MAX * M_PI;
 }
 
 void Camera::camDirectUpdate() {
