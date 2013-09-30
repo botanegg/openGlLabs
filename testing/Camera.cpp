@@ -2,6 +2,8 @@
 #include <cmath>
 #include <climits>
 
+#define FOCUSMOD 4
+
 Camera::Camera() {
     angleXZ = 0;
     angleH = 0;
@@ -10,76 +12,89 @@ Camera::Camera() {
     camY = 0;
     camZ = 0;
 
+    focus = false;
+
     camDirectUpdate();
 }
 
+inline float Camera::focusmod(float x) const {
+    return focus ? x / FOCUSMOD : x;
+}
+
+void Camera::setFocus(bool _focus) {
+    focus = _focus;
+}
+
+bool Camera::getFocus() const {
+    return focus;
+}
 
 void Camera::moveForward() {
-    camX+=viewVecX;
-    camY+=viewVecY;
-    camZ+=viewVecZ;
+    camX += focusmod(viewVecX);
+    camY += focusmod(viewVecY);
+    camZ += focusmod(viewVecZ);
 }
 
 void Camera::moveBack() {
-    camX-=viewVecX;
-    camY-=viewVecY;
-    camZ-=viewVecZ;
+    camX -= focusmod(viewVecX);
+    camY -= focusmod(viewVecY);
+    camZ -= focusmod(viewVecZ);
 }
 
 void Camera::moveUp() {
-    camY+=1;
+    camY += focusmod(1);
 }
 
 void Camera::moveDown() {
-    camY-=1;
+    camY -= focusmod(1);
 }
 
 void Camera::moveLeft() {
     float X = viewVecZinXZ;
     float Z = -viewVecXinXZ;
-    camX+=X;
-    camZ+=Z;
+    camX += focusmod(X);
+    camZ += focusmod(Z);
 }
 
 void Camera::moveRight() {
     float X = -viewVecZinXZ;
     float Z = viewVecXinXZ;
-    camX+=X;
-    camZ+=Z;
+    camX += focusmod(X);
+    camZ += focusmod(Z);
 }
 
 void Camera::addAngleXZ(short add) {
-    angleXZ+=add;
+    angleXZ += add;
     camDirectUpdate();
 }
 
 void Camera::addAngleH(short add) {
-    add*=2;
+    add *= 2;
     if ( ((int)angleH + (int)add) < SHRT_MIN ) angleH = (short)SHRT_MIN;
     else if ( ((int)angleH + (int)add) > SHRT_MAX ) angleH = (short)SHRT_MAX;
-    else angleH+=add;
+    else angleH += add;
     camDirectUpdate();
 }
 
-float Camera::lookAtX() {
+float Camera::lookAtX() const {
     return camX + viewVecX;
 }
 
-float Camera::lookAtY() {
+float Camera::lookAtY() const {
     return camY + viewVecY;
 }
 
-float Camera::lookAtZ() {
+float Camera::lookAtZ() const {
     return camZ + viewVecZ;
 }
 
-float Camera::getAngleXZ() {
-    return -((float)angleXZ)/(unsigned short)USHRT_MAX*2*M_PI;
+float Camera::getAngleXZ() const {
+    return -((float)angleXZ) / (unsigned short)USHRT_MAX * 2 * M_PI;
 }
 
 
-float Camera::getAngleH() {
-    return ((float)angleH)/(unsigned short)USHRT_MAX*M_PI;
+float Camera::getAngleH() const {
+    return ((float)angleH) / (unsigned short)(USHRT_MAX * M_PI);
 }
 
 void Camera::camDirectUpdate() {

@@ -2,7 +2,7 @@
 #include <memory.h>
 
 Keyboard::Keyboard() {
-    memset(keyPress,0,sizeof(keyPress));
+    memset(keyPress, 0, sizeof(keyPress));
 }
 
 void Keyboard::press(unsigned char key) {
@@ -13,6 +13,6 @@ void Keyboard::release(unsigned char key) {
     keyPress[key] = false;
 }
 
-bool Keyboard::isPressed(unsigned char key) {
+bool Keyboard::isPressed(unsigned char key) const {
     return keyPress[key];
 }

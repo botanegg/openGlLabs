@@ -17,6 +17,8 @@ set(srcs
 	Keyboard.cpp
 	Mouse.cpp
 	Camera.cpp
+	IDrawtickable.cpp
+	MyObject.cpp
 )
 
 add_executable(${PROJECT_NAME} ${srcs})

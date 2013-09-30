@@ -21,6 +21,8 @@ public:
     unsigned short angleXZ;
     short angleH;
 
+    bool focus;
+
     Camera();
 
     void moveForward();
@@ -33,12 +35,16 @@ public:
     void addAngleXZ(short add);
     void addAngleH(short add);
 
-    float lookAtX();
-    float lookAtY();
-    float lookAtZ();
+    float lookAtX() const;
+    float lookAtY() const;
+    float lookAtZ() const;
 
-    float getAngleXZ();
-    float getAngleH();
+    float getAngleXZ() const;
+    float getAngleH() const;
+
+    void setFocus(bool _focus);
+    bool getFocus() const;
+    inline float focusmod(float x) const;
 
     void camDirectUpdate();
 
