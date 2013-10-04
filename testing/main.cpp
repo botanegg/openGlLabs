@@ -42,6 +42,7 @@ void keyboardDown(unsigned char key, int x, int y) {
     case  27:   // ESC
         exit(0);
         break;
+
     default:
         app.kb.press(key);
     }
@@ -65,9 +66,9 @@ void keyboardUp(unsigned char key, int x, int y) {
 /* reshaped window */
 void reshape(int width, int height) {
     GLfloat fieldOfView = 72.0f;
-    glViewport (0, 0, (GLsizei) width, (GLsizei) height);
+    glViewport(0, 0, (GLsizei) width, (GLsizei) height);
 
-    glMatrixMode (GL_PROJECTION);
+    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(fieldOfView, (GLfloat) width / (GLfloat) height, 0.1, 500.0);
     glMatrixMode(GL_MODELVIEW);
@@ -77,9 +78,10 @@ void reshape(int width, int height) {
 /* executed when button 'button' is put into state 'state' at screen position ('x', 'y') */
 void mouseClick(int button, int state, int x, int y) {
     //std::cout << "Mouse" << button << " " << state << " " << x << " " << y << std::endl;
-    if (state == 0)
+    if(state == 0)
         app.m.press(x, y);
-    if (state == 1)
+
+    if(state == 1)
         app.m.release();
 }
 
@@ -95,10 +97,10 @@ void draw() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    gluLookAt(app.cam.camX,app.cam.camY,app.cam.camZ, app.cam.lookAtX() , app.cam.lookAtY(), app.cam.lookAtZ(), app.cam.upDirectX, app.cam.upDirectY, app.cam.upDirectZ);
+    gluLookAt(app.cam.camX, app.cam.camY, app.cam.camZ, app.cam.lookAtX() , app.cam.lookAtY(), app.cam.lookAtZ(), app.cam.upDirectX, app.cam.upDirectY, app.cam.upDirectZ);
 
     float pos[4] = {3, 3, 3, 1};
-    float dir[3] = {-1, -1, -1};
+    float dir[3] = { -1, -1, -1};
 
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
     glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
@@ -118,21 +120,20 @@ void draw() {
     glEnd();
 
     glColor3f(1.0, 1.0, 1.0);
-    int N = 10;
-    int M = 10;
+    int N = 25;
+    int M = 25;
     float dx = 10;
     float dz = 10;
     float x0 = -N * dx / 2;
     float z0 = -M * dz / 2;
     glBegin(GL_LINES);
     {
-        for (int i = 0; i <= N; ++i)
-        {
+        for(int i = 0; i <= N; ++i) {
             glVertex3f(i * dx + x0, -1.0f, z0);
             glVertex3f(i * dx + x0, -1.0f, z0 + M * dz);
         }
-        for (int j = 0; j <= M; ++j)
-        {
+
+        for(int j = 0; j <= M; ++j) {
             glVertex3f(x0, -1.0f, z0 + j * dz);
             glVertex3f(N * dx + x0, -1.0f, z0 + j * dz);
         }
@@ -192,7 +193,7 @@ void initGL(int width, int height) {
 }
 
 /* initialize GLUT settings, register callbacks, enter main loop */
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
 
     glutInit(&argc, argv);
 

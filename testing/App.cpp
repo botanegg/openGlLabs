@@ -18,12 +18,17 @@ void App::tick() {
 
     cam.setFocus(kb.isPressed('p'));
 
-    if (kb.isPressed('w')) cam.moveForward();
-    if (kb.isPressed('a')) cam.moveLeft();
-    if (kb.isPressed('s')) cam.moveBack();
-    if (kb.isPressed('d')) cam.moveRight();
-    if (kb.isPressed('u')) cam.moveUp();
-    if (kb.isPressed('j')) cam.moveDown();
+    if(kb.isPressed('w')) cam.moveForward();
+
+    if(kb.isPressed('a')) cam.moveLeft();
+
+    if(kb.isPressed('s')) cam.moveBack();
+
+    if(kb.isPressed('d')) cam.moveRight();
+
+    if(kb.isPressed('u')) cam.moveUp();
+
+    if(kb.isPressed('j')) cam.moveDown();
 
     cam.addAngleXZ(m.dx * 64);
     cam.addAngleH(m.dy * 64);

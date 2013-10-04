@@ -70,9 +70,13 @@ void Camera::addAngleXZ(short add) {
 
 void Camera::addAngleH(short add) {
     add *= 2;
-    if ( ((int)angleH + (int)add) < SHRT_MIN ) angleH = (short)SHRT_MIN;
-    else if ( ((int)angleH + (int)add) > SHRT_MAX ) angleH = (short)SHRT_MAX;
+
+    if(((int)angleH + (int)add) < SHRT_MIN) angleH = (short)SHRT_MIN;
+
+    else if(((int)angleH + (int)add) > SHRT_MAX) angleH = (short)SHRT_MAX;
+
     else angleH += add;
+
     camDirectUpdate();
 }
 

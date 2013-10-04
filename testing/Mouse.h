@@ -8,11 +8,11 @@ public:
     float x;
     float y;
 
-    Mouse ();
+    Mouse();
 
-    void press (int x, int y);
-    void motion (int x, int y);
-    void release ();
+    void press(int x, int y);
+    void motion(int x, int y);
+    void release();
 
     // const bool isPressed (unsigned char key);
 };

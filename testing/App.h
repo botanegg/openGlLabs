@@ -15,7 +15,7 @@ public:
     Mouse m;
     Camera cam;
 
-    std::vector <IDrawtickable*> DT;
+    std::vector <IDrawtickable *> DT;
 
     unsigned _tick;
 
