@@ -4,7 +4,7 @@ set(PROJECT_NAME testing)
 project(${PROJECT_NAME})
 
 
-set(COMPILE_FLAGS "-g -Wall -Wextra -Wpedantic -Weffc++")
+set(COMPILE_FLAGS "-g -pedantic -Wall -Wextra -Wabi -Wcast-qual -Wconversion -Wfloat-equal -Winline -Wmissing-declarations -Wmissing-format-attribute -Wno-long-long -Woverloaded-virtual -Wpacked -Wredundant-decls -Wshadow -Wsign-promo -Weffc++")
 
 set(CMAKE_C_FLAGS "${COMPILE_FLAGS}")
 set(CMAKE_CPP_FLAGS "${COMPILE_FLAGS}")
@@ -19,6 +19,7 @@ set(srcs
 	Camera.cpp
 	IDrawtickable.cpp
 	MyObject.cpp
+	Texture.cpp
 )
 
 add_executable(${PROJECT_NAME} ${srcs})

@@ -1,11 +1,8 @@
 #include "App.h"
 #include "MyObject.h"
+#include "Texture.h"
 
-App::App() {
-    _tick = 0;
-    MyObject *a = new MyObject(0, 5, 0);
-    DT.push_back(a);
-}
+App::App(): kb(), m(), cam(), DT(), _tick(0) {}
 
 App::~App() {
     for(unsigned i = 0; i < DT.size(); ++i) delete DT[i];
@@ -30,12 +27,17 @@ void App::tick() {
 
     if(kb.isPressed('j')) cam.moveDown();
 
-    cam.addAngleXZ(m.dx * 64);
-    cam.addAngleH(m.dy * 64);
+    cam.addAngleXZ((short int)(m.dx << 6));
+    cam.addAngleH((short int)(m.dy << 6));
 
-    m.release();
+    m.tick();
 }
 
 void App::draw() {
     for(unsigned i = 0; i < DT.size(); ++i) DT[i] -> draw();
+}
+
+void App::init() {
+    IDrawtickable *a = new MyObject(0, 5, 0);
+    DT.push_back(a);
 }

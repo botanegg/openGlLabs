@@ -2,9 +2,11 @@
 #define _MYOBJECT_H
 
 #include "IDrawtickable.h"
+#include "Texture.h"
 
 class MyObject: public IDrawtickable {
 private:
+    Texture tex;
     float x;
     float y;
     float z;

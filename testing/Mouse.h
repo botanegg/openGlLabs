@@ -3,16 +3,16 @@
 
 class Mouse {
 public:
-    float dx;
-    float dy;
-    float x;
-    float y;
+    int x;
+    int y;
+    int dx;
+    int dy;
 
     Mouse();
 
     void press(int x, int y);
     void motion(int x, int y);
-    void release();
+    void tick();
 
     // const bool isPressed (unsigned char key);
 };

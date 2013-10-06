@@ -24,6 +24,7 @@ public:
 
     void tick();
     void draw();
+    void init();
 };
 
 #endif /* _APP_H */

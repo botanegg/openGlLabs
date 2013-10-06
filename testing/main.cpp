@@ -21,6 +21,15 @@
 
 #define SMOOTH
 
+void menu(int);
+void keyboardDown(unsigned char, int, int);
+void keyboardUp(unsigned char, int, int);
+void reshape(int, int);
+void mouseClick(int, int, int, int);
+void mouseMotion(int, int);
+void idle();
+void initGL(int, int);
+
 App app;
 
 /* process menu option 'op' */
@@ -80,9 +89,6 @@ void mouseClick(int button, int state, int x, int y) {
     //std::cout << "Mouse" << button << " " << state << " " << x << " " << y << std::endl;
     if(state == 0)
         app.m.press(x, y);
-
-    if(state == 1)
-        app.m.release();
 }
 
 /* executed when the mouse moves to position ('x', 'y') */
@@ -101,9 +107,10 @@ void draw() {
 
     float pos[4] = {3, 3, 3, 1};
     float dir[3] = { -1, -1, -1};
-
+    glColor3f(1.0, 1.0, 1.0);
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
     glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
+    glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 
     glBegin(GL_LINES);
     {
@@ -159,6 +166,7 @@ void initGL(int width, int height) {
 
     reshape(width, height);
 
+    //glEnable(GL_TEXTURE_2D);
     // тест прозрачности, т.е. будет учитываться
     // четвертый параметр в glColor
     glEnable(GL_ALPHA_TEST);
@@ -227,6 +235,8 @@ int main(int argc, char **argv) {
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     initGL(640, 480);
+
+    app.init();
 
     glutMainLoop();
     return 0;
