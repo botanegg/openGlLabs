@@ -5,6 +5,7 @@
 
 class Texture {
 public:
+    static int count;
     unsigned char *data;
     GLuint textureId;
     int width;

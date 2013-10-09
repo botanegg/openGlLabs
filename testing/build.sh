@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export CC=gcc
-export CXX=g++
+export CC=clang
+export CXX=clang++
 
 mkdir -p build
 cd build

@@ -2,6 +2,9 @@
 #include "MyObject.h"
 #include "Texture.h"
 
+#include <stdlib.h>
+#include <iostream>
+
 App::App(): kb(), m(), cam(), DT(), _tick(0) {}
 
 App::~App() {
@@ -38,6 +41,12 @@ void App::draw() {
 }
 
 void App::init() {
-    IDrawtickable *a = new MyObject(0, 5, 0);
-    DT.push_back(a);
+    srand(100000007);
+
+    for(int i = 0; i < 10 ; i++) {
+        IDrawtickable *a = new MyObject(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10);
+        DT.push_back(a);
+    }
+
+    std::cout << Texture::count << std::endl;
 }

@@ -29,6 +29,7 @@ void mouseClick(int, int, int, int);
 void mouseMotion(int, int);
 void idle();
 void initGL(int, int);
+void draw();
 
 App app;
 
@@ -40,8 +41,6 @@ void menu(int op) {
         exit(0);
     }
 }
-
-void draw();
 
 /* executed when a regular key is pressed */
 void keyboardDown(unsigned char key, int x, int y) {
@@ -99,6 +98,7 @@ void mouseMotion(int x, int y) {
 
 /* render the scene */
 void draw() {
+    glEnable(GL_MULTISAMPLE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -152,6 +152,8 @@ void draw() {
 
     glFlush();
     glutSwapBuffers();
+
+    glDisable(GL_MULTISAMPLE);
 }
 
 /* executed when program is idle */
@@ -166,7 +168,7 @@ void initGL(int width, int height) {
 
     reshape(width, height);
 
-    //glEnable(GL_TEXTURE_2D);
+    glEnable(GL_CULL_FACE);
     // тест прозрачности, т.е. будет учитываться
     // четвертый параметр в glColor
     glEnable(GL_ALPHA_TEST);
@@ -185,6 +187,7 @@ void initGL(int width, int height) {
     // разрешаем смешение цветов
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     // устанавливаем положение нулевой лампы
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClearDepth(1.0f);
