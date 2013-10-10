@@ -48,8 +48,8 @@ Texture::Texture(const Texture &a): data(0), textureId(0), width(a.width), heigh
 
 
 Texture &Texture::operator= (const Texture &rhs) {
-    if (this == &rhs) return *this;
-    
+    if(this == &rhs) return *this;
+
     glDeleteTextures(1, &textureId);
     delete [] data;
 
