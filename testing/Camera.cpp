@@ -2,6 +2,8 @@
 #include <cmath>
 #include <climits>
 
+#define PI_f 3.14159265358979323846f
+
 #define FOCUSMOD 4
 
 Camera::Camera() {
@@ -93,21 +95,21 @@ float Camera::lookAtZ() const {
 }
 
 float Camera::getAngleXZ() const {
-    return -((float)angleXZ) / (unsigned short)USHRT_MAX * 2 * M_PI;
+    return -((float)angleXZ) / (unsigned short)USHRT_MAX * 2 * PI_f;
 }
 
 
 float Camera::getAngleH() const {
-    return ((float)angleH) / (unsigned short)USHRT_MAX * M_PI;
+    return ((float)angleH) / (unsigned short)USHRT_MAX * PI_f;
 }
 
 void Camera::camDirectUpdate() {
-    viewVecX = cos(getAngleXZ()) * cos(getAngleH());
-    viewVecZ = sin(getAngleXZ()) * cos(getAngleH());
-    viewVecY = sin(getAngleH());
+    viewVecX = cosf(getAngleXZ()) * cosf(getAngleH());
+    viewVecZ = sinf(getAngleXZ()) * cosf(getAngleH());
+    viewVecY = sinf(getAngleH());
 
-    viewVecXinXZ = cos(getAngleXZ());
-    viewVecZinXZ = sin(getAngleXZ());
+    viewVecXinXZ = cosf(getAngleXZ());
+    viewVecZinXZ = sinf(getAngleXZ());
 
     float a[3];
     float b[3];
