@@ -1,5 +1,7 @@
 #include "App.h"
 #include "MyObject.h"
+#include "lab4.h"
+#include "lab5.h"
 #include "Texture.h"
 
 #include <stdlib.h>
@@ -44,9 +46,12 @@ void App::init() {
     srand(100000007);
 
     for(int i = 0; i < 10 ; i++) {
-        IDrawtickable *a = new MyObject(rand() % 20 - 10, rand() % 20 - 10, rand() % 20 - 10);
+        IDrawtickable *a = new MyObject(rand() % 20 + 10, rand() % 20 + 10, rand() % 20 + 10);
         DT.push_back(a);
     }
+
+    DT.push_back(new lab4());
+    DT.push_back(new lab5());
 
     std::cout << Texture::count << std::endl;
 }

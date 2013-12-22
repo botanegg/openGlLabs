@@ -98,7 +98,7 @@ void mouseMotion(int x, int y) {
 
 /* render the scene */
 void draw() {
-    glEnable(GL_MULTISAMPLE);
+    //glEnable(GL_MULTISAMPLE);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -153,7 +153,7 @@ void draw() {
     glFlush();
     glutSwapBuffers();
 
-    glDisable(GL_MULTISAMPLE);
+    //glDisable(GL_MULTISAMPLE);
 }
 
 /* executed when program is idle */
@@ -168,7 +168,7 @@ void initGL(int width, int height) {
 
     reshape(width, height);
 
-    glEnable(GL_CULL_FACE);
+    //glEnable(GL_CULL_FACE);
     // тест прозрачности, т.е. будет учитываться
     // четвертый параметр в glColor
     glEnable(GL_ALPHA_TEST);

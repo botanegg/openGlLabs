@@ -20,6 +20,8 @@ set(srcs
 	IDrawtickable.cpp
 	MyObject.cpp
 	Texture.cpp
+	lab4.cpp
+	lab5.cpp
 )
 
 add_executable(${PROJECT_NAME} ${srcs})
