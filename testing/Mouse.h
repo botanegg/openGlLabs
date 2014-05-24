@@ -7,10 +7,12 @@ public:
     int y;
     int dx;
     int dy;
+    bool buttons[10];
 
     Mouse();
 
-    void press(int x, int y);
+    void press(int button, int x, int y);
+    void release(int button, int x, int y);
     void motion(int x, int y);
     void tick();
 

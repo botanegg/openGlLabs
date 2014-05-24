@@ -44,6 +44,7 @@ void menu(int op) {
 
 /* executed when a regular key is pressed */
 void keyboardDown(unsigned char key, int x, int y) {
+	std::cout << "Kyeboard down x:" << x << " y: " << y << " key: " << key << std::endl;
     switch(key) {
     case 'Q':
     case 'q':
@@ -58,6 +59,7 @@ void keyboardDown(unsigned char key, int x, int y) {
 
 /* executed when a regular key is released */
 void keyboardUp(unsigned char key, int x, int y) {
+	std::cout << "Kyeboard up x:" << x << " y: " << y << " key: " << key << std::endl;
     app.kb.release(key);
 }
 
@@ -85,9 +87,11 @@ void reshape(int width, int height) {
 
 /* executed when button 'button' is put into state 'state' at screen position ('x', 'y') */
 void mouseClick(int button, int state, int x, int y) {
-    //std::cout << "Mouse" << button << " " << state << " " << x << " " << y << std::endl;
+    std::cout << "Mouse " << button << " " << state << " " << x << " " << y << std::endl;
     if(state == 0)
-        app.m.press(x, y);
+        app.m.press(button, x, y);
+    if(state == 1)
+        app.m.release(button, x, y);
 }
 
 /* executed when the mouse moves to position ('x', 'y') */
@@ -105,8 +109,8 @@ void draw() {
 
     gluLookAt(app.cam.camX, app.cam.camY, app.cam.camZ, app.cam.lookAtX() , app.cam.lookAtY(), app.cam.lookAtZ(), app.cam.upDirectX, app.cam.upDirectY, app.cam.upDirectZ);
 
-    float pos[4] = {3, 3, 3, 1};
-    float dir[3] = { -1, -1, -1};
+    float pos[4] = {app.cam.camX, app.cam.camY, app.cam.camZ, 1};
+    float dir[3] = { app.cam.viewVecX , app.cam.viewVecY, app.cam.viewVecZ};
     glColor3f(1.0, 1.0, 1.0);
     glLightfv(GL_LIGHT0, GL_POSITION, pos);
     glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, dir);
@@ -131,18 +135,18 @@ void draw() {
     int M = 25;
     float dx = 10;
     float dz = 10;
-    float x0 = -N * dx / 2;
-    float z0 = -M * dz / 2;
+    float x0 = -(float)N * dx / 2;
+    float z0 = -(float)M * dz / 2;
     glBegin(GL_LINES);
     {
         for(int i = 0; i <= N; ++i) {
-            glVertex3f(i * dx + x0, -1.0f, z0);
-            glVertex3f(i * dx + x0, -1.0f, z0 + M * dz);
+            glVertex3f((float)i * dx + x0, -1.0f, z0);
+            glVertex3f((float)i * dx + x0, -1.0f, z0 + (float)M * dz);
         }
 
         for(int j = 0; j <= M; ++j) {
-            glVertex3f(x0, -1.0f, z0 + j * dz);
-            glVertex3f(N * dx + x0, -1.0f, z0 + j * dz);
+            glVertex3f(x0, -1.0f, z0 + (float)j * dz);
+            glVertex3f((float)N * dx + x0, -1.0f, z0 + (float)j * dz);
         }
     }
     glEnd();
@@ -151,7 +155,7 @@ void draw() {
     app.draw();
 
     glFlush();
-    glutSwapBuffers();
+
 
     //glDisable(GL_MULTISAMPLE);
 }
@@ -161,6 +165,7 @@ void idle() {
     app.tick();
     //std::cout << "tick" << app._tick <<std::endl;
     draw();
+    glutSwapBuffers();
 }
 
 /* initialize OpenGL settings */
@@ -226,16 +231,6 @@ int main(int argc, char **argv) {
     glutIdleFunc(idle);
     glutIgnoreKeyRepeat(true); // ignore keys held down
 
-    // create a sub menu
-    int subMenu = glutCreateMenu(menu);
-    glutAddMenuEntry("Do nothing", 0);
-    glutAddMenuEntry("Really Quit", 'q');
-
-    // create main "right click" menu
-    glutCreateMenu(menu);
-    glutAddSubMenu("Sub Menu", subMenu);
-    glutAddMenuEntry("Quit", 'q');
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     initGL(640, 480);
 

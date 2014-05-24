@@ -20,7 +20,7 @@ void App::tick() {
 
     cam.setFocus(kb.isPressed('p'));
 
-    if(kb.isPressed('w')) cam.moveForward();
+    if(kb.isPressed('w') || (m.buttons[0] && m.buttons[2])) cam.moveForward();
 
     if(kb.isPressed('a')) cam.moveLeft();
 
